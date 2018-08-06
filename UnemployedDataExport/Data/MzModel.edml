@@ -1,0 +1,818 @@
+﻿<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="Schukin.UnemployedDataExport.Data.Store" Alias="Self" Provider="Devart.Data.Oracle" ProviderManifestToken="Oracle, 11.2.0.4" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:devart="http://devart.com/schemas/edml/StorageSchemaExtensions/1.0" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityContainer Name="SchukinUnemployedDataExportDataStoreContainer">
+          <EntitySet Name="PERSONS" EntityType="Schukin.UnemployedDataExport.Data.Store.PERSONS" store:Type="Tables" Schema="MZ" Table="PERSONS" />
+          <EntitySet Name="IDENTITY_DOCUMENTS" EntityType="Schukin.UnemployedDataExport.Data.Store.IDENTITY_DOCUMENTS" store:Type="Tables" Schema="MZ" Table="IDENTITY_DOCUMENTS" />
+          <EntitySet Name="GLOSSARY_CATEGORIES" EntityType="Schukin.UnemployedDataExport.Data.Store.GLOSSARY_CATEGORIES" store:Type="Tables" Schema="MZ" Table="GLOSSARY_CATEGORIES" />
+          <EntitySet Name="GLOSSARY_DOCUMENTS" EntityType="Schukin.UnemployedDataExport.Data.Store.GLOSSARY_DOCUMENTS" store:Type="Tables" Schema="MZ" Table="GLOSSARY_DOCUMENTS" />
+          <AssociationSet Name="FK_IDENTITY_DOCUMENTS_PERSONS" Association="Schukin.UnemployedDataExport.Data.Store.FK_IDENTITY_DOCUMENTS_PERSONS">
+            <End Role="PERSONS" EntitySet="PERSONS" />
+            <End Role="IDENTITY_DOCUMENTS" EntitySet="IDENTITY_DOCUMENTS" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PERSONS_GLOSSARY_CATEGORIES" Association="Schukin.UnemployedDataExport.Data.Store.FK_PERSONS_GLOSSARY_CATEGORIES">
+            <End Role="GLOSSARY_CATEGORIES" EntitySet="GLOSSARY_CATEGORIES" />
+            <End Role="PERSONS" EntitySet="PERSONS" />
+          </AssociationSet>
+          <AssociationSet Name="FK_IDENTITY_DOCUMENTS_ID" Association="Schukin.UnemployedDataExport.Data.Store.FK_IDENTITY_DOCUMENTS_ID">
+            <End Role="GLOSSARY_DOCUMENTS" EntitySet="GLOSSARY_DOCUMENTS" />
+            <End Role="IDENTITY_DOCUMENTS" EntitySet="IDENTITY_DOCUMENTS" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="PERSONS">
+          <Documentation>
+            <Summary>Сведения о личности</Summary>
+          </Documentation>
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int64" Nullable="false">
+            <Documentation>
+              <Summary>Идентификатор записи</Summary>
+            </Documentation>
+          </Property>
+          <Property Name="SNILS" Type="VARCHAR2" MaxLength="14">
+            <Documentation>
+              <Summary>СНИЛС</Summary>
+            </Documentation>
+          </Property>
+          <Property Name="LASTNAME" Type="VARCHAR2" MaxLength="60">
+            <Documentation>
+              <Summary>Фамилия</Summary>
+            </Documentation>
+          </Property>
+          <Property Name="FIRSTNAME" Type="VARCHAR2" MaxLength="60">
+            <Documentation>
+              <Summary>Имя</Summary>
+            </Documentation>
+          </Property>
+          <Property Name="SECONDNAME" Type="VARCHAR2" MaxLength="60">
+            <Documentation>
+              <Summary>Отчество</Summary>
+            </Documentation>
+          </Property>
+          <Property Name="BIRTHDATE" Type="DATE" Nullable="false">
+            <Documentation>
+              <Summary>Дата рождения</Summary>
+            </Documentation>
+          </Property>
+          <Property Name="GENDER" Type="VARCHAR2" MaxLength="1">
+            <Documentation>
+              <Summary>Пол</Summary>
+            </Documentation>
+          </Property>
+          <Property Name="ADDRESS_BIRTH_STRING" Type="VARCHAR2" MaxLength="200">
+            <Documentation>
+              <Summary>Место рождения - Строка адреса</Summary>
+            </Documentation>
+          </Property>
+          <Property Name="ADDRESS_BIRTH_ADDRESSCODE" Type="VARCHAR2" MaxLength="200">
+            <Documentation>
+              <Summary>Место рождения - Код адреса КЛАДР</Summary>
+            </Documentation>
+          </Property>
+          <Property Name="ADDRESS_BIRTH_ZIPCODE" Type="VARCHAR2" MaxLength="6">
+            <Documentation>
+              <Summary>Место рождения - Почтовый индекс</Summary>
+            </Documentation>
+          </Property>
+          <Property Name="ADDRESS_BIRTH_COUNTRY" Type="VARCHAR2" MaxLength="50">
+            <Documentation>
+              <Summary>Место рождения - Страна</Summary>
+            </Documentation>
+          </Property>
+          <Property Name="ADDRESS_BIRTH_TERRITORYSUBJECT" Type="VARCHAR2" MaxLength="50">
+            <Documentation>
+              <Summary>Место рождения - Субъект РФ</Summary>
+            </Documentation>
+          </Property>
+          <Property Name="ADDRESS_BIRTH_DISTRICT" Type="VARCHAR2" MaxLength="50">
+            <Documentation>
+              <Summary>Место рождения - Район</Summary>
+            </Documentation>
+          </Property>
+          <Property Name="ADDRESS_BIRTH_PLACE" Type="VARCHAR2" MaxLength="50">
+            <Documentation>
+              <Summary>Место рождения - Населенный пункт</Summary>
+            </Documentation>
+          </Property>
+          <Property Name="ADDRESS_BIRTH_STREET" Type="VARCHAR2" MaxLength="50">
+            <Documentation>
+              <Summary>Место рождения - Улица</Summary>
+            </Documentation>
+          </Property>
+          <Property Name="ADDRESS_BIRTH_HOUSE" Type="VARCHAR2" MaxLength="3">
+            <Documentation>
+              <Summary>Место рождения - Дом</Summary>
+            </Documentation>
+          </Property>
+          <Property Name="ADDRESS_BIRTH_BUILDING" Type="VARCHAR2" MaxLength="2">
+            <Documentation>
+              <Summary>Место рождения - Корпус</Summary>
+            </Documentation>
+          </Property>
+          <Property Name="ADDRESS_BIRTH_APPARTMENT" Type="VARCHAR2" MaxLength="4">
+            <Documentation>
+              <Summary>Место рождения - Квартира</Summary>
+            </Documentation>
+          </Property>
+          <Property Name="ADDRESS_REG_STRING" Type="VARCHAR2" MaxLength="200">
+            <Documentation>
+              <Summary>Адрес регистрации - Строка адреса</Summary>
+            </Documentation>
+          </Property>
+          <Property Name="ADDRESS_REG_ADDRESSCODE" Type="VARCHAR2" MaxLength="200">
+            <Documentation>
+              <Summary>Адрес регистрации - Код адреса КЛАДР</Summary>
+            </Documentation>
+          </Property>
+          <Property Name="ADDRESS_REG_ZIPCODE" Type="VARCHAR2" MaxLength="6">
+            <Documentation>
+              <Summary>Адрес регистрации - Почтовый индекс</Summary>
+            </Documentation>
+          </Property>
+          <Property Name="ADDRESS_REG_COUNTRY" Type="VARCHAR2" MaxLength="50">
+            <Documentation>
+              <Summary>Адрес регистрации - Страна</Summary>
+            </Documentation>
+          </Property>
+          <Property Name="ADDRESS_REG_TERRITORYSUBJECT" Type="VARCHAR2" MaxLength="50">
+            <Documentation>
+              <Summary>Адрес регистрации - Субъект РФ</Summary>
+            </Documentation>
+          </Property>
+          <Property Name="ADDRESS_REG_DISTRICT" Type="VARCHAR2" MaxLength="50">
+            <Documentation>
+              <Summary>Адрес регистрации - Район</Summary>
+            </Documentation>
+          </Property>
+          <Property Name="ADDRESS_REG_PLACE" Type="VARCHAR2" MaxLength="50">
+            <Documentation>
+              <Summary>Адрес регистрации - Населенный пункт</Summary>
+            </Documentation>
+          </Property>
+          <Property Name="ADDRESS_REG_STREET" Type="VARCHAR2" MaxLength="50">
+            <Documentation>
+              <Summary>Адрес регистрации - Улица</Summary>
+            </Documentation>
+          </Property>
+          <Property Name="ADDRESS_REG_HOUSE" Type="VARCHAR2" MaxLength="7">
+            <Documentation>
+              <Summary>Адрес регистрации - Дом</Summary>
+            </Documentation>
+          </Property>
+          <Property Name="ADDRESS_REG_BUILDING" Type="VARCHAR2" MaxLength="2">
+            <Documentation>
+              <Summary>Адрес регистрации - Корпус</Summary>
+            </Documentation>
+          </Property>
+          <Property Name="ADDRESS_REG_APPARTMENT" Type="VARCHAR2" MaxLength="5">
+            <Documentation>
+              <Summary>Адрес регистрации - Квартира</Summary>
+            </Documentation>
+          </Property>
+          <Property Name="ADDRESS_FACT_STRING" Type="VARCHAR2" MaxLength="200">
+            <Documentation>
+              <Summary>Адрес фактического проживания - Строка адреса</Summary>
+            </Documentation>
+          </Property>
+          <Property Name="ADDRESS_FACT_ADDRESSCODE" Type="VARCHAR2" MaxLength="200">
+            <Documentation>
+              <Summary>Адрес фактического проживания - Код адреса КЛАДР</Summary>
+            </Documentation>
+          </Property>
+          <Property Name="ADDRESS_FACT_ZIPCODE" Type="VARCHAR2" MaxLength="6">
+            <Documentation>
+              <Summary>Адрес фактического проживания - Почтовый индекс</Summary>
+            </Documentation>
+          </Property>
+          <Property Name="ADDRESS_FACT_COUNTRY" Type="VARCHAR2" MaxLength="50">
+            <Documentation>
+              <Summary>Адрес фактического проживания - Страна</Summary>
+            </Documentation>
+          </Property>
+          <Property Name="ADDRESS_FACT_TERRITORYSUBJECT" Type="VARCHAR2" MaxLength="50">
+            <Documentation>
+              <Summary>Адрес фактического проживания - Субъект РФ</Summary>
+            </Documentation>
+          </Property>
+          <Property Name="ADDRESS_FACT_DISTRICT" Type="VARCHAR2" MaxLength="50">
+            <Documentation>
+              <Summary>Адрес фактического проживания - Район</Summary>
+            </Documentation>
+          </Property>
+          <Property Name="ADDRESS_FACT_PLACE" Type="VARCHAR2" MaxLength="50">
+            <Documentation>
+              <Summary>Адрес фактического проживания - Населенный пункт</Summary>
+            </Documentation>
+          </Property>
+          <Property Name="ADDRESS_FACT_STREET" Type="VARCHAR2" MaxLength="50">
+            <Documentation>
+              <Summary>Адрес фактического проживания - Улица</Summary>
+            </Documentation>
+          </Property>
+          <Property Name="ADDRESS_FACT_HOUSE" Type="VARCHAR2" MaxLength="7">
+            <Documentation>
+              <Summary>Адрес фактического проживания - Дом</Summary>
+            </Documentation>
+          </Property>
+          <Property Name="ADDRESS_FACT_BUILDING" Type="VARCHAR2" MaxLength="2">
+            <Documentation>
+              <Summary>Адрес фактического проживания - Корпус</Summary>
+            </Documentation>
+          </Property>
+          <Property Name="ADDRESS_FACT_APPARTMENT" Type="VARCHAR2" MaxLength="5">
+            <Documentation>
+              <Summary>Адрес фактического проживания - Квартира</Summary>
+            </Documentation>
+          </Property>
+          <Property Name="CATEGORY_ID" Type="int64" Nullable="false">
+            <Documentation>
+              <Summary>Идентификатор категории личности</Summary>
+            </Documentation>
+          </Property>
+        </EntityType>
+        <EntityType Name="IDENTITY_DOCUMENTS">
+          <Documentation>
+            <Summary>Документы, удостоверяющие личность</Summary>
+          </Documentation>
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int64" Nullable="false">
+            <Documentation>
+              <Summary>Идентификатор</Summary>
+            </Documentation>
+          </Property>
+          <Property Name="PERSON_ID" Type="int64" Nullable="false">
+            <Documentation>
+              <Summary>Идентификатор гражданина</Summary>
+            </Documentation>
+          </Property>
+          <Property Name="DOCUMENT_ID" Type="int64" Nullable="false">
+            <Documentation>
+              <Summary>Идентификатор типа документа</Summary>
+            </Documentation>
+          </Property>
+          <Property Name="DOCUMENT_SERIES" Type="VARCHAR2" MaxLength="8">
+            <Documentation>
+              <Summary>Серия документа</Summary>
+            </Documentation>
+          </Property>
+          <Property Name="DOCUMENT_NUMBER" Type="VARCHAR2" MaxLength="8">
+            <Documentation>
+              <Summary>Номер документа</Summary>
+            </Documentation>
+          </Property>
+          <Property Name="DOCUMENT_ISSUEDATE" Type="DATE">
+            <Documentation>
+              <Summary>Дата выдачи документа</Summary>
+            </Documentation>
+          </Property>
+          <Property Name="DOCUMENT_ISSUER" Type="VARCHAR2" MaxLength="200">
+            <Documentation>
+              <Summary>Наименование организации, выдавшей документ</Summary>
+            </Documentation>
+          </Property>
+        </EntityType>
+        <EntityType Name="GLOSSARY_CATEGORIES">
+          <Documentation>
+            <Summary>Категории граждан</Summary>
+          </Documentation>
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int64" Nullable="false">
+            <Documentation>
+              <Summary>Идентификатор</Summary>
+            </Documentation>
+          </Property>
+          <Property Name="NAME" Type="VARCHAR2" MaxLength="200">
+            <Documentation>
+              <Summary>Наименование</Summary>
+            </Documentation>
+          </Property>
+          <Property Name="KOD_VIPL" Type="VARCHAR2" MaxLength="2" />
+        </EntityType>
+        <EntityType Name="GLOSSARY_DOCUMENTS">
+          <Documentation>
+            <Summary>Типы документов</Summary>
+          </Documentation>
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int64" Nullable="false">
+            <Documentation>
+              <Summary>Идентификатор</Summary>
+            </Documentation>
+          </Property>
+          <Property Name="NAME" Type="VARCHAR2" MaxLength="200">
+            <Documentation>
+              <Summary>Наименование</Summary>
+            </Documentation>
+          </Property>
+          <Property Name="KOD_DOC" Type="int" />
+        </EntityType>
+        <Association Name="FK_IDENTITY_DOCUMENTS_PERSONS">
+          <End Role="PERSONS" Type="Schukin.UnemployedDataExport.Data.Store.PERSONS" Multiplicity="1" />
+          <End Role="IDENTITY_DOCUMENTS" Type="Schukin.UnemployedDataExport.Data.Store.IDENTITY_DOCUMENTS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PERSONS">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="IDENTITY_DOCUMENTS">
+              <PropertyRef Name="PERSON_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PERSONS_GLOSSARY_CATEGORIES">
+          <End Role="GLOSSARY_CATEGORIES" Type="Schukin.UnemployedDataExport.Data.Store.GLOSSARY_CATEGORIES" Multiplicity="1" />
+          <End Role="PERSONS" Type="Schukin.UnemployedDataExport.Data.Store.PERSONS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="GLOSSARY_CATEGORIES">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="PERSONS">
+              <PropertyRef Name="CATEGORY_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_IDENTITY_DOCUMENTS_ID">
+          <End Role="GLOSSARY_DOCUMENTS" Type="Schukin.UnemployedDataExport.Data.Store.GLOSSARY_DOCUMENTS" Multiplicity="1" />
+          <End Role="IDENTITY_DOCUMENTS" Type="Schukin.UnemployedDataExport.Data.Store.IDENTITY_DOCUMENTS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="GLOSSARY_DOCUMENTS">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="IDENTITY_DOCUMENTS">
+              <PropertyRef Name="DOCUMENT_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="Schukin.UnemployedDataExport.Data" Alias="Self" d4p1:ViewGeneration="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:devart="http://devart.com/schemas/edml/ConceptualSchemaExtensions/1.0" xmlns:ed="http://devart.com/schemas/EntityDeveloper/1.0" annotation:UseStrongSpatialTypes="false" xmlns:d4p1="http://devart.com/schemas/edml/ConceptualSchemaExtensions/1.0" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="Entities" annotation:LazyLoadingEnabled="true" ed:Guid="506b7c4c-2dd0-4794-b4b6-636c0667f698">
+          <EntitySet Name="People" EntityType="Schukin.UnemployedDataExport.Data.Person" />
+          <EntitySet Name="IdentityDocuments" EntityType="Schukin.UnemployedDataExport.Data.IdentityDocument" />
+          <EntitySet Name="GlossaryCategories" EntityType="Schukin.UnemployedDataExport.Data.GlossaryCategory" />
+          <EntitySet Name="GlossaryDocuments" EntityType="Schukin.UnemployedDataExport.Data.GlossaryDocument" />
+          <AssociationSet Name="FK_IDENTITY_DOCUMENTS_PERSONSSet" Association="Schukin.UnemployedDataExport.Data.FK_IDENTITY_DOCUMENTS_PERSONS">
+            <End Role="Person" EntitySet="People" />
+            <End Role="IdentityDocuments" EntitySet="IdentityDocuments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PERSONS_GLOSSARY_CATEGORIESSet" Association="Schukin.UnemployedDataExport.Data.FK_PERSONS_GLOSSARY_CATEGORIES">
+            <End Role="GlossaryCategory" EntitySet="GlossaryCategories" />
+            <End Role="People" EntitySet="People" />
+          </AssociationSet>
+          <AssociationSet Name="FK_IDENTITY_DOCUMENTS_IDSet" Association="Schukin.UnemployedDataExport.Data.FK_IDENTITY_DOCUMENTS_ID">
+            <End Role="GlossaryDocument" EntitySet="GlossaryDocuments" />
+            <End Role="IdentityDocuments" EntitySet="IdentityDocuments" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Person" ed:Guid="eda900b6-b45c-4bd0-9c26-27483e844470">
+          <Documentation>
+            <Summary>Сведения о личности</Summary>
+          </Documentation>
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" ed:ValidateRequired="true" ed:Guid="a85aed81-4378-41b6-be0e-fb29661ef8ce">
+            <Documentation>
+              <Summary>Идентификатор записи</Summary>
+            </Documentation>
+          </Property>
+          <Property Name="Snils" Type="String" MaxLength="14" ed:ValidateMaxLength="14" ed:ValidateRequired="false" ed:Guid="39e76311-5e15-4c32-9fa6-05c8411ac1a8">
+            <Documentation>
+              <Summary>СНИЛС</Summary>
+            </Documentation>
+          </Property>
+          <Property Name="Lastname" Type="String" MaxLength="60" ed:ValidateMaxLength="60" ed:ValidateRequired="false" ed:Guid="7d633112-b69a-43be-8797-ccd658f19258">
+            <Documentation>
+              <Summary>Фамилия</Summary>
+            </Documentation>
+          </Property>
+          <Property Name="Firstname" Type="String" MaxLength="60" ed:ValidateMaxLength="60" ed:ValidateRequired="false" ed:Guid="40a91c0e-fa95-47f7-8f32-1baa2410f142">
+            <Documentation>
+              <Summary>Имя</Summary>
+            </Documentation>
+          </Property>
+          <Property Name="Secondname" Type="String" MaxLength="60" ed:ValidateMaxLength="60" ed:ValidateRequired="false" ed:Guid="2b1d790b-c8fb-4e87-9f60-b3b04edd0359">
+            <Documentation>
+              <Summary>Отчество</Summary>
+            </Documentation>
+          </Property>
+          <Property Name="Birthdate" Type="DateTime" Nullable="false" Precision="0" ed:ValidateRequired="true" ed:Guid="05553f09-db75-431a-a332-56487dcfe020">
+            <Documentation>
+              <Summary>Дата рождения</Summary>
+            </Documentation>
+          </Property>
+          <Property Name="Gender" Type="String" MaxLength="1" ed:ValidateMaxLength="1" ed:ValidateRequired="false" ed:Guid="48dc6b26-aa12-4d26-8aa8-bd18d0a0217a">
+            <Documentation>
+              <Summary>Пол</Summary>
+            </Documentation>
+          </Property>
+          <Property Name="AddressBirthString" Type="String" MaxLength="200" ed:ValidateMaxLength="200" ed:ValidateRequired="false" ed:Guid="0e00267b-c20f-4bd0-bab7-60b3d5ea293f">
+            <Documentation>
+              <Summary>Место рождения - Строка адреса</Summary>
+            </Documentation>
+          </Property>
+          <Property Name="AddressBirthAddresscode" Type="String" MaxLength="200" ed:ValidateMaxLength="200" ed:ValidateRequired="false" ed:Guid="07933bba-55f7-4a15-97f2-63faef0f904c">
+            <Documentation>
+              <Summary>Место рождения - Код адреса КЛАДР</Summary>
+            </Documentation>
+          </Property>
+          <Property Name="AddressBirthZipcode" Type="String" MaxLength="6" ed:ValidateMaxLength="6" ed:ValidateRequired="false" ed:Guid="b8a13c54-3d3a-42bf-912e-8baace552939">
+            <Documentation>
+              <Summary>Место рождения - Почтовый индекс</Summary>
+            </Documentation>
+          </Property>
+          <Property Name="AddressBirthCountry" Type="String" MaxLength="50" ed:ValidateMaxLength="50" ed:ValidateRequired="false" ed:Guid="150fc9c4-5bb4-4c75-9193-f173c3e340b0">
+            <Documentation>
+              <Summary>Место рождения - Страна</Summary>
+            </Documentation>
+          </Property>
+          <Property Name="AddressBirthTerritorysubject" Type="String" MaxLength="50" ed:ValidateMaxLength="50" ed:ValidateRequired="false" ed:Guid="fddbec6f-6a49-4481-bdee-fad7f8297398">
+            <Documentation>
+              <Summary>Место рождения - Субъект РФ</Summary>
+            </Documentation>
+          </Property>
+          <Property Name="AddressBirthDistrict" Type="String" MaxLength="50" ed:ValidateMaxLength="50" ed:ValidateRequired="false" ed:Guid="78279e9a-7018-45fa-8d6c-bc451c8cb569">
+            <Documentation>
+              <Summary>Место рождения - Район</Summary>
+            </Documentation>
+          </Property>
+          <Property Name="AddressBirthPlace" Type="String" MaxLength="50" ed:ValidateMaxLength="50" ed:ValidateRequired="false" ed:Guid="4520816d-c5d9-40d2-8936-c3ac26c81ac8">
+            <Documentation>
+              <Summary>Место рождения - Населенный пункт</Summary>
+            </Documentation>
+          </Property>
+          <Property Name="AddressBirthStreet" Type="String" MaxLength="50" ed:ValidateMaxLength="50" ed:ValidateRequired="false" ed:Guid="e8bdeccc-6418-4882-97dc-e4e1100a5803">
+            <Documentation>
+              <Summary>Место рождения - Улица</Summary>
+            </Documentation>
+          </Property>
+          <Property Name="AddressBirthHouse" Type="String" MaxLength="3" ed:ValidateMaxLength="3" ed:ValidateRequired="false" ed:Guid="6bda8c4b-ade7-40e1-b84d-a94735a291ce">
+            <Documentation>
+              <Summary>Место рождения - Дом</Summary>
+            </Documentation>
+          </Property>
+          <Property Name="AddressBirthBuilding" Type="String" MaxLength="2" ed:ValidateMaxLength="2" ed:ValidateRequired="false" ed:Guid="92a8f974-c9ea-415a-be50-e56aa07d5785">
+            <Documentation>
+              <Summary>Место рождения - Корпус</Summary>
+            </Documentation>
+          </Property>
+          <Property Name="AddressBirthAppartment" Type="String" MaxLength="4" ed:ValidateMaxLength="4" ed:ValidateRequired="false" ed:Guid="4fb64e9c-6cf6-4137-b5c7-eb42d0704ed8">
+            <Documentation>
+              <Summary>Место рождения - Квартира</Summary>
+            </Documentation>
+          </Property>
+          <Property Name="AddressRegString" Type="String" MaxLength="200" ed:ValidateMaxLength="200" ed:ValidateRequired="false" ed:Guid="941284a8-764a-4748-91bf-1d0b2fd614f4">
+            <Documentation>
+              <Summary>Адрес регистрации - Строка адреса</Summary>
+            </Documentation>
+          </Property>
+          <Property Name="AddressRegAddresscode" Type="String" MaxLength="200" ed:ValidateMaxLength="200" ed:ValidateRequired="false" ed:Guid="0539c0d1-407b-4794-a5f0-2a7ae0df08a8">
+            <Documentation>
+              <Summary>Адрес регистрации - Код адреса КЛАДР</Summary>
+            </Documentation>
+          </Property>
+          <Property Name="AddressRegZipcode" Type="String" MaxLength="6" ed:ValidateMaxLength="6" ed:ValidateRequired="false" ed:Guid="bdb10e18-8663-4357-a804-f5c43fff6a65">
+            <Documentation>
+              <Summary>Адрес регистрации - Почтовый индекс</Summary>
+            </Documentation>
+          </Property>
+          <Property Name="AddressRegCountry" Type="String" MaxLength="50" ed:ValidateMaxLength="50" ed:ValidateRequired="false" ed:Guid="cf1de64c-0a7a-4845-897b-beb9adaca389">
+            <Documentation>
+              <Summary>Адрес регистрации - Страна</Summary>
+            </Documentation>
+          </Property>
+          <Property Name="AddressRegTerritorysubject" Type="String" MaxLength="50" ed:ValidateMaxLength="50" ed:ValidateRequired="false" ed:Guid="9fe27ad0-3f74-43c1-9ec3-f67b85f56347">
+            <Documentation>
+              <Summary>Адрес регистрации - Субъект РФ</Summary>
+            </Documentation>
+          </Property>
+          <Property Name="AddressRegDistrict" Type="String" MaxLength="50" ed:ValidateMaxLength="50" ed:ValidateRequired="false" ed:Guid="f265f82a-03b2-482f-966b-43c7e4345f53">
+            <Documentation>
+              <Summary>Адрес регистрации - Район</Summary>
+            </Documentation>
+          </Property>
+          <Property Name="AddressRegPlace" Type="String" MaxLength="50" ed:ValidateMaxLength="50" ed:ValidateRequired="false" ed:Guid="04c7af0b-00cb-4bcd-9806-ece416bf6b65">
+            <Documentation>
+              <Summary>Адрес регистрации - Населенный пункт</Summary>
+            </Documentation>
+          </Property>
+          <Property Name="AddressRegStreet" Type="String" MaxLength="50" ed:ValidateMaxLength="50" ed:ValidateRequired="false" ed:Guid="6917b260-2505-4c0d-839a-301387fd8707">
+            <Documentation>
+              <Summary>Адрес регистрации - Улица</Summary>
+            </Documentation>
+          </Property>
+          <Property Name="AddressRegHouse" Type="String" MaxLength="7" ed:ValidateMaxLength="7" ed:ValidateRequired="false" ed:Guid="926fc08f-213c-4728-996f-a0a7ce53ae7e">
+            <Documentation>
+              <Summary>Адрес регистрации - Дом</Summary>
+            </Documentation>
+          </Property>
+          <Property Name="AddressRegBuilding" Type="String" MaxLength="2" ed:ValidateMaxLength="2" ed:ValidateRequired="false" ed:Guid="bb34a3cd-f226-4d02-98f8-a33759c00d38">
+            <Documentation>
+              <Summary>Адрес регистрации - Корпус</Summary>
+            </Documentation>
+          </Property>
+          <Property Name="AddressRegAppartment" Type="String" MaxLength="5" ed:ValidateMaxLength="5" ed:ValidateRequired="false" ed:Guid="eed66d7b-f664-441a-912a-f11477a7f543">
+            <Documentation>
+              <Summary>Адрес регистрации - Квартира</Summary>
+            </Documentation>
+          </Property>
+          <Property Name="AddressFactString" Type="String" MaxLength="200" ed:ValidateMaxLength="200" ed:ValidateRequired="false" ed:Guid="a52d3b17-4baa-42a9-85eb-992735ea41d6">
+            <Documentation>
+              <Summary>Адрес фактического проживания - Строка адреса</Summary>
+            </Documentation>
+          </Property>
+          <Property Name="AddressFactAddresscode" Type="String" MaxLength="200" ed:ValidateMaxLength="200" ed:ValidateRequired="false" ed:Guid="6ccf9466-d6cc-4fb0-822c-3395a56c8495">
+            <Documentation>
+              <Summary>Адрес фактического проживания - Код адреса КЛАДР</Summary>
+            </Documentation>
+          </Property>
+          <Property Name="AddressFactZipcode" Type="String" MaxLength="6" ed:ValidateMaxLength="6" ed:ValidateRequired="false" ed:Guid="686aabd2-ebbf-4f05-9c83-4fcf16cabeed">
+            <Documentation>
+              <Summary>Адрес фактического проживания - Почтовый индекс</Summary>
+            </Documentation>
+          </Property>
+          <Property Name="AddressFactCountry" Type="String" MaxLength="50" ed:ValidateMaxLength="50" ed:ValidateRequired="false" ed:Guid="fd139a81-adfb-4893-86e7-e6ea4efaf1c9">
+            <Documentation>
+              <Summary>Адрес фактического проживания - Страна</Summary>
+            </Documentation>
+          </Property>
+          <Property Name="AddressFactTerritorysubject" Type="String" MaxLength="50" ed:ValidateMaxLength="50" ed:ValidateRequired="false" ed:Guid="f0077d24-0d02-48f8-b2e7-e592492db077">
+            <Documentation>
+              <Summary>Адрес фактического проживания - Субъект РФ</Summary>
+            </Documentation>
+          </Property>
+          <Property Name="AddressFactDistrict" Type="String" MaxLength="50" ed:ValidateMaxLength="50" ed:ValidateRequired="false" ed:Guid="4954a125-108e-48cf-9802-737d870d173c">
+            <Documentation>
+              <Summary>Адрес фактического проживания - Район</Summary>
+            </Documentation>
+          </Property>
+          <Property Name="AddressFactPlace" Type="String" MaxLength="50" ed:ValidateMaxLength="50" ed:ValidateRequired="false" ed:Guid="cb430dea-afdf-43ef-8cef-0efbeb8449ec">
+            <Documentation>
+              <Summary>Адрес фактического проживания - Населенный пункт</Summary>
+            </Documentation>
+          </Property>
+          <Property Name="AddressFactStreet" Type="String" MaxLength="50" ed:ValidateMaxLength="50" ed:ValidateRequired="false" ed:Guid="bba6e431-ecae-4fbc-a29c-9900d26d92ea">
+            <Documentation>
+              <Summary>Адрес фактического проживания - Улица</Summary>
+            </Documentation>
+          </Property>
+          <Property Name="AddressFactHouse" Type="String" MaxLength="7" ed:ValidateMaxLength="7" ed:ValidateRequired="false" ed:Guid="00582cc2-401d-4ef6-8bf9-dd674f84defb">
+            <Documentation>
+              <Summary>Адрес фактического проживания - Дом</Summary>
+            </Documentation>
+          </Property>
+          <Property Name="AddressFactBuilding" Type="String" MaxLength="2" ed:ValidateMaxLength="2" ed:ValidateRequired="false" ed:Guid="957515bf-665c-476a-ae98-dfd6e7b0da44">
+            <Documentation>
+              <Summary>Адрес фактического проживания - Корпус</Summary>
+            </Documentation>
+          </Property>
+          <Property Name="AddressFactAppartment" Type="String" MaxLength="5" ed:ValidateMaxLength="5" ed:ValidateRequired="false" ed:Guid="5197aa7a-10f1-48a7-9595-666f85f0666d">
+            <Documentation>
+              <Summary>Адрес фактического проживания - Квартира</Summary>
+            </Documentation>
+          </Property>
+          <Property Name="CategoryId" Type="Int32" Nullable="false" ed:ValidateRequired="true" ed:Guid="b8fe6097-f88c-418a-87ec-61719981576d">
+            <Documentation>
+              <Summary>Идентификатор категории личности</Summary>
+            </Documentation>
+          </Property>
+          <NavigationProperty Name="IdentityDocuments" Relationship="Schukin.UnemployedDataExport.Data.FK_IDENTITY_DOCUMENTS_PERSONS" FromRole="Person" ToRole="IdentityDocuments" ed:Guid="1ac880e5-4744-42cb-9475-a62f36366bd7" />
+          <NavigationProperty Name="GlossaryCategory" Relationship="Schukin.UnemployedDataExport.Data.FK_PERSONS_GLOSSARY_CATEGORIES" FromRole="People" ToRole="GlossaryCategory" ed:Guid="54c895c4-0986-48eb-bd25-563996bc6fd1" />
+        </EntityType>
+        <EntityType Name="IdentityDocument" ed:Guid="b9ef2f24-991f-4b17-9d06-c35e64f1dc7e">
+          <Documentation>
+            <Summary>Документы, удостоверяющие личность</Summary>
+          </Documentation>
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" ed:ValidateRequired="true" ed:Guid="5425a203-8e06-4322-afda-92892785d94f">
+            <Documentation>
+              <Summary>Идентификатор</Summary>
+            </Documentation>
+          </Property>
+          <Property Name="PersonId" Type="Int32" Nullable="false" ed:ValidateRequired="true" ed:Guid="5b370d25-ba5b-444d-9727-2d2cc5110d8f">
+            <Documentation>
+              <Summary>Идентификатор гражданина</Summary>
+            </Documentation>
+          </Property>
+          <Property Name="DocumentId" Type="Int32" Nullable="false" ed:ValidateRequired="true" ed:Guid="27c86d02-b58b-4fbb-a221-ab80632f4495">
+            <Documentation>
+              <Summary>Идентификатор типа документа</Summary>
+            </Documentation>
+          </Property>
+          <Property Name="DocumentSeries" Type="String" MaxLength="8" ed:ValidateMaxLength="8" ed:ValidateRequired="false" ed:Guid="26cd9acc-c969-4007-893e-ae0c0d4f8962">
+            <Documentation>
+              <Summary>Серия документа</Summary>
+            </Documentation>
+          </Property>
+          <Property Name="DocumentNumber" Type="String" MaxLength="8" ed:ValidateMaxLength="8" ed:ValidateRequired="false" ed:Guid="075995d9-a4d7-4167-96b7-2af00550920a">
+            <Documentation>
+              <Summary>Номер документа</Summary>
+            </Documentation>
+          </Property>
+          <Property Name="DocumentIssuedate" Type="DateTime" Precision="0" ed:ValidateRequired="false" ed:Guid="02e6f197-71f9-4f7d-af9a-1d5f388fbde4">
+            <Documentation>
+              <Summary>Дата выдачи документа</Summary>
+            </Documentation>
+          </Property>
+          <Property Name="DocumentIssuer" Type="String" MaxLength="200" ed:ValidateMaxLength="200" ed:ValidateRequired="false" ed:Guid="644ef798-9230-4c36-8ccd-4ee78fc180b0">
+            <Documentation>
+              <Summary>Наименование организации, выдавшей документ</Summary>
+            </Documentation>
+          </Property>
+          <NavigationProperty Name="Person" Relationship="Schukin.UnemployedDataExport.Data.FK_IDENTITY_DOCUMENTS_PERSONS" FromRole="IdentityDocuments" ToRole="Person" ed:Guid="335739f4-d9c5-4875-bae6-f062bb3fc0a3" />
+          <NavigationProperty Name="GlossaryDocument" Relationship="Schukin.UnemployedDataExport.Data.FK_IDENTITY_DOCUMENTS_ID" FromRole="IdentityDocuments" ToRole="GlossaryDocument" ed:Guid="854df136-0e4d-4561-9a99-798fefcbb13e" />
+        </EntityType>
+        <EntityType Name="GlossaryCategory" ed:Guid="a74b6bc3-0624-482a-a873-e76fd9649517">
+          <Documentation>
+            <Summary>Категории граждан</Summary>
+          </Documentation>
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" ed:ValidateRequired="true" ed:Guid="7a2df5f1-dcd5-4d10-9a96-1200c020d583">
+            <Documentation>
+              <Summary>Идентификатор</Summary>
+            </Documentation>
+          </Property>
+          <Property Name="Name" Type="String" MaxLength="200" ed:ValidateMaxLength="200" ed:ValidateRequired="false" ed:Guid="5c10fc94-cf4a-43b7-9f43-90539329cd3d">
+            <Documentation>
+              <Summary>Наименование</Summary>
+            </Documentation>
+          </Property>
+          <Property Name="KodVipl" Type="String" MaxLength="2" ed:ValidateMaxLength="2" ed:ValidateRequired="false" ed:Guid="4eada963-e5d5-4219-b913-366018b2c61e" />
+        </EntityType>
+        <EntityType Name="GlossaryDocument" ed:Guid="d27d9cd2-f328-4043-a1c1-52fa4f45488d">
+          <Documentation>
+            <Summary>Типы документов</Summary>
+          </Documentation>
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" ed:ValidateRequired="true" ed:Guid="19a6a8c0-5ea1-448e-9534-21c11b3163da">
+            <Documentation>
+              <Summary>Идентификатор</Summary>
+            </Documentation>
+          </Property>
+          <Property Name="Name" Type="String" MaxLength="200" ed:ValidateMaxLength="200" ed:ValidateRequired="false" ed:Guid="b37a8633-391d-46c6-a8ba-1c47df538945">
+            <Documentation>
+              <Summary>Наименование</Summary>
+            </Documentation>
+          </Property>
+          <Property Name="KodDoc" Type="Int32" ed:ValidateRequired="false" ed:Guid="87e30746-701b-40c2-b856-4f46c2674e75" />
+        </EntityType>
+        <Association Name="FK_IDENTITY_DOCUMENTS_PERSONS" ed:Guid="e95300b5-371d-4391-9dee-c2839ea578bf">
+          <End Role="Person" Type="Schukin.UnemployedDataExport.Data.Person" Multiplicity="1" />
+          <End Role="IdentityDocuments" Type="Schukin.UnemployedDataExport.Data.IdentityDocument" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Person">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="IdentityDocuments">
+              <PropertyRef Name="PersonId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PERSONS_GLOSSARY_CATEGORIES" ed:Guid="90b4e426-b334-4274-87a3-5572ddb5971a">
+          <End Role="GlossaryCategory" Type="Schukin.UnemployedDataExport.Data.GlossaryCategory" Multiplicity="1" />
+          <End Role="People" Type="Schukin.UnemployedDataExport.Data.Person" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="GlossaryCategory">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="People">
+              <PropertyRef Name="CategoryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_IDENTITY_DOCUMENTS_ID" ed:Guid="4b94c26c-a854-4216-a323-87f4f5265603">
+          <End Role="GlossaryDocument" Type="Schukin.UnemployedDataExport.Data.GlossaryDocument" Multiplicity="1" />
+          <End Role="IdentityDocuments" Type="Schukin.UnemployedDataExport.Data.IdentityDocument" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="GlossaryDocument">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="IdentityDocuments">
+              <PropertyRef Name="DocumentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- MSL content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="SchukinUnemployedDataExportDataStoreContainer" CdmEntityContainer="Entities">
+          <EntitySetMapping Name="People">
+            <EntityTypeMapping TypeName="Schukin.UnemployedDataExport.Data.Person">
+              <MappingFragment StoreEntitySet="PERSONS">
+                <ScalarProperty Name="Id" ColumnName="ID" />
+                <ScalarProperty Name="Snils" ColumnName="SNILS" />
+                <ScalarProperty Name="Lastname" ColumnName="LASTNAME" />
+                <ScalarProperty Name="Firstname" ColumnName="FIRSTNAME" />
+                <ScalarProperty Name="Secondname" ColumnName="SECONDNAME" />
+                <ScalarProperty Name="Birthdate" ColumnName="BIRTHDATE" />
+                <ScalarProperty Name="Gender" ColumnName="GENDER" />
+                <ScalarProperty Name="AddressBirthString" ColumnName="ADDRESS_BIRTH_STRING" />
+                <ScalarProperty Name="AddressBirthAddresscode" ColumnName="ADDRESS_BIRTH_ADDRESSCODE" />
+                <ScalarProperty Name="AddressBirthZipcode" ColumnName="ADDRESS_BIRTH_ZIPCODE" />
+                <ScalarProperty Name="AddressBirthCountry" ColumnName="ADDRESS_BIRTH_COUNTRY" />
+                <ScalarProperty Name="AddressBirthTerritorysubject" ColumnName="ADDRESS_BIRTH_TERRITORYSUBJECT" />
+                <ScalarProperty Name="AddressBirthDistrict" ColumnName="ADDRESS_BIRTH_DISTRICT" />
+                <ScalarProperty Name="AddressBirthPlace" ColumnName="ADDRESS_BIRTH_PLACE" />
+                <ScalarProperty Name="AddressBirthStreet" ColumnName="ADDRESS_BIRTH_STREET" />
+                <ScalarProperty Name="AddressBirthHouse" ColumnName="ADDRESS_BIRTH_HOUSE" />
+                <ScalarProperty Name="AddressBirthBuilding" ColumnName="ADDRESS_BIRTH_BUILDING" />
+                <ScalarProperty Name="AddressBirthAppartment" ColumnName="ADDRESS_BIRTH_APPARTMENT" />
+                <ScalarProperty Name="AddressRegString" ColumnName="ADDRESS_REG_STRING" />
+                <ScalarProperty Name="AddressRegAddresscode" ColumnName="ADDRESS_REG_ADDRESSCODE" />
+                <ScalarProperty Name="AddressRegZipcode" ColumnName="ADDRESS_REG_ZIPCODE" />
+                <ScalarProperty Name="AddressRegCountry" ColumnName="ADDRESS_REG_COUNTRY" />
+                <ScalarProperty Name="AddressRegTerritorysubject" ColumnName="ADDRESS_REG_TERRITORYSUBJECT" />
+                <ScalarProperty Name="AddressRegDistrict" ColumnName="ADDRESS_REG_DISTRICT" />
+                <ScalarProperty Name="AddressRegPlace" ColumnName="ADDRESS_REG_PLACE" />
+                <ScalarProperty Name="AddressRegStreet" ColumnName="ADDRESS_REG_STREET" />
+                <ScalarProperty Name="AddressRegHouse" ColumnName="ADDRESS_REG_HOUSE" />
+                <ScalarProperty Name="AddressRegBuilding" ColumnName="ADDRESS_REG_BUILDING" />
+                <ScalarProperty Name="AddressRegAppartment" ColumnName="ADDRESS_REG_APPARTMENT" />
+                <ScalarProperty Name="AddressFactString" ColumnName="ADDRESS_FACT_STRING" />
+                <ScalarProperty Name="AddressFactAddresscode" ColumnName="ADDRESS_FACT_ADDRESSCODE" />
+                <ScalarProperty Name="AddressFactZipcode" ColumnName="ADDRESS_FACT_ZIPCODE" />
+                <ScalarProperty Name="AddressFactCountry" ColumnName="ADDRESS_FACT_COUNTRY" />
+                <ScalarProperty Name="AddressFactTerritorysubject" ColumnName="ADDRESS_FACT_TERRITORYSUBJECT" />
+                <ScalarProperty Name="AddressFactDistrict" ColumnName="ADDRESS_FACT_DISTRICT" />
+                <ScalarProperty Name="AddressFactPlace" ColumnName="ADDRESS_FACT_PLACE" />
+                <ScalarProperty Name="AddressFactStreet" ColumnName="ADDRESS_FACT_STREET" />
+                <ScalarProperty Name="AddressFactHouse" ColumnName="ADDRESS_FACT_HOUSE" />
+                <ScalarProperty Name="AddressFactBuilding" ColumnName="ADDRESS_FACT_BUILDING" />
+                <ScalarProperty Name="AddressFactAppartment" ColumnName="ADDRESS_FACT_APPARTMENT" />
+                <ScalarProperty Name="CategoryId" ColumnName="CATEGORY_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="IdentityDocuments">
+            <EntityTypeMapping TypeName="Schukin.UnemployedDataExport.Data.IdentityDocument">
+              <MappingFragment StoreEntitySet="IDENTITY_DOCUMENTS">
+                <ScalarProperty Name="Id" ColumnName="ID" />
+                <ScalarProperty Name="PersonId" ColumnName="PERSON_ID" />
+                <ScalarProperty Name="DocumentId" ColumnName="DOCUMENT_ID" />
+                <ScalarProperty Name="DocumentSeries" ColumnName="DOCUMENT_SERIES" />
+                <ScalarProperty Name="DocumentNumber" ColumnName="DOCUMENT_NUMBER" />
+                <ScalarProperty Name="DocumentIssuedate" ColumnName="DOCUMENT_ISSUEDATE" />
+                <ScalarProperty Name="DocumentIssuer" ColumnName="DOCUMENT_ISSUER" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="GlossaryCategories">
+            <EntityTypeMapping TypeName="Schukin.UnemployedDataExport.Data.GlossaryCategory">
+              <MappingFragment StoreEntitySet="GLOSSARY_CATEGORIES">
+                <ScalarProperty Name="Id" ColumnName="ID" />
+                <ScalarProperty Name="Name" ColumnName="NAME" />
+                <ScalarProperty Name="KodVipl" ColumnName="KOD_VIPL" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="GlossaryDocuments">
+            <EntityTypeMapping TypeName="Schukin.UnemployedDataExport.Data.GlossaryDocument">
+              <MappingFragment StoreEntitySet="GLOSSARY_DOCUMENTS">
+                <ScalarProperty Name="Id" ColumnName="ID" />
+                <ScalarProperty Name="Name" ColumnName="NAME" />
+                <ScalarProperty Name="KodDoc" ColumnName="KOD_DOC" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <edmx:Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </edmx:Connection>
+    <edmx:Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+      </DesignerInfoPropertySet>
+    </edmx:Options>
+    <edmx:Diagrams>
+      <Diagram Name="Main" />
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
